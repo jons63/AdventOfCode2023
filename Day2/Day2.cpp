@@ -74,7 +74,7 @@ int PartOne(const std::string& file)
         }
 
     }
-    cout << "1.1 answer: " << ans << "\n";
+    cout << "2.1 answer: " << ans << "\n";
     return EXIT_SUCCESS;
 }
 
@@ -140,7 +140,7 @@ int PartTwo(const std::string& file)
         }
         ans += maxRed*maxGreen*maxBlue;
     }
-    cout << "1.2 answer: " << ans << "\n";
+    cout << "2.2 answer: " << ans << "\n";
     return EXIT_SUCCESS;
 }
 
