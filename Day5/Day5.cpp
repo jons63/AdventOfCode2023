@@ -101,17 +101,11 @@ int PartOne(const std::string& file)
         else if (inputPart == InputParts::Seeds)
         {
             string seedsStr = split(line, ":")[1];
-            cout << seedsStr << "\n";
             vector<string> seedsVec = split(seedsStr, " ");
             for (auto seed : seedsVec)
             {
                 seeds.emplace(stoll(seed));
             }
-            for (auto seed : seeds)
-            {
-                cout << seed << ", ";
-            }
-            cout << "\n";
         }
         else if (inputPart == InputParts::SeedToSoil)
         {
@@ -365,7 +359,7 @@ int PartTwo(const std::string& file)
 }
 
 int main(int argc, char *argv[])
-{;
+{
     if (argc < 2) {
         std::cerr << "Missing input file!\n";
         return EXIT_FAILURE;
