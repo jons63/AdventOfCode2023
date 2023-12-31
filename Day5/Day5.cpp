@@ -9,6 +9,8 @@
 #include <array>
 #include <climits>
 
+#include "StringHelp/StringHelp.h"
+
 using namespace std;
 
 struct Map
@@ -30,37 +32,9 @@ enum InputParts
     HumidityToLocation
 };
 
-vector<string> split(string str, const string& delimiter)
-{
-    size_t delimiterPos = 0;
-    vector<string> parts{};
-    while ((delimiterPos = str.find(delimiter)) != str.npos)
-    {
-        if (delimiterPos)
-        {
-            string subStr = str.substr(0, delimiterPos);
-            if (subStr != delimiter || subStr != "\n" && !subStr.empty())
-            {
-                parts.push_back(subStr);
-            }
-        }
-        str.erase(0, delimiterPos+1);
-    }
-    if (!str.empty())
-    {
-        parts.push_back(str);
-    }
-    return parts;
-}
-
-void strip(string& str)
-{
-    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-}
-
 void getMapData(vector<Map>& inp, string line)
 {
-    vector<string> values = split(line, " ");
+    vector<string> values = Helpers::split(line, " ");
     long long dest = stoll(values[0]);
     long long source = stoll(values[1]);
     long long range = stoll(values[2]);
@@ -100,8 +74,8 @@ int PartOne(const std::string& file)
         else if (line.find("map:") != line.npos) {}
         else if (inputPart == InputParts::Seeds)
         {
-            string seedsStr = split(line, ":")[1];
-            vector<string> seedsVec = split(seedsStr, " ");
+            string seedsStr = Helpers::split(line, ":")[1];
+            vector<string> seedsVec = Helpers::split(seedsStr, " ");
             for (auto seed : seedsVec)
             {
                 seeds.emplace(stoll(seed));
@@ -245,9 +219,9 @@ int PartTwo(const std::string& file)
         else if (line.find("map:") != line.npos) {}
         else if (inputPart == InputParts::Seeds)
         {
-            string seedsStr = split(line, ":")[1];
+            string seedsStr = Helpers::split(line, ":")[1];
             cout << seedsStr << "\n";
-            vector<string> seedsVec = split(seedsStr, " ");
+            vector<string> seedsVec = Helpers::split(seedsStr, " ");
             auto it = seedsVec.begin();
             while (it != seedsVec.end())
             {

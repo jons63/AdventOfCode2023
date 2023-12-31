@@ -67,7 +67,7 @@ int PartOne(const std::string& file)
                numberIndexes.push_back({lineNum, i});
                if(!('0' <= line[i+1] && line[i+1] <= '9'))
                {
-                    values.push_back(pair(number, numberIndexes));
+                    values.emplace_back(pair<string, vector<Index>>(number, numberIndexes));
                     number = "";
                     numberIndexes.clear();
                }
@@ -135,7 +135,7 @@ int PartTwo(const std::string& file)
                numberIndexes.push_back({lineNum, i});
                if(!('0' <= line[i+1] && line[i+1] <= '9'))
                {
-                    values.push_back(pair(number, numberIndexes));
+                    values.emplace_back(pair<string, vector<Index>>(number, numberIndexes));
                     number = "";
                     numberIndexes.clear();
                }

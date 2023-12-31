@@ -8,35 +8,9 @@
 #include <cmath>
 #include <array>
 
+#include "StringHelp/StringHelp.h"
+
 using namespace std;
-
-vector<string> split(string str, const string& delimiter)
-{
-    size_t delimiterPos = 0;
-    vector<string> parts{};
-    while ((delimiterPos = str.find(delimiter)) != str.npos)
-    {
-        if (delimiterPos)
-        {
-            string subStr = str.substr(0, delimiterPos);
-            if (subStr != delimiter || subStr != "\n" && !subStr.empty())
-            {
-                parts.push_back(subStr);
-            }
-        }
-        str.erase(0, delimiterPos+1);
-    }
-    if (!str.empty())
-    {
-        parts.push_back(str);
-    }
-    return parts;
-}
-
-void strip(string& str)
-{
-    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-}
 
 int PartOne(const std::string& file)
 {
@@ -57,10 +31,10 @@ int PartOne(const std::string& file)
         set<int> winningNumbers;
         int matches = 0;
 
-        string numbers = split(line, ":").back();
-        auto tmp = split(numbers, "|");
-        auto winningNumbersString = split(tmp[0], " ");
-        auto cardNumbers = split(tmp[1], " ");
+        string numbers = Helpers::split(line, ":").back();
+        auto tmp = Helpers::split(numbers, "|");
+        auto winningNumbersString = Helpers::split(tmp[0], " ");
+        auto cardNumbers = Helpers::split(tmp[1], " ");
 
         for (auto val : winningNumbersString)
         {
@@ -107,12 +81,12 @@ int PartTwo(const std::string& file)
         set<int> winningNumbers;
         int matches = 0;
 
-        auto numbers = split(line, ":");
-        int card = stoi(split(numbers[0], " ")[1]) - 1;
+        auto numbers = Helpers::split(line, ":");
+        int card = stoi(Helpers::split(numbers[0], " ")[1]) - 1;
 
-        auto tmp = split(numbers[1], "|");
-        auto winningNumbersString = split(tmp[0], " ");
-        auto cardNumbers = split(tmp[1], " ");
+        auto tmp = Helpers::split(numbers[1], "|");
+        auto winningNumbersString = Helpers::split(tmp[0], " ");
+        auto cardNumbers = Helpers::split(tmp[1], " ");
 
         for (auto val : winningNumbersString)
         {
