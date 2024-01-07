@@ -1,1 +1,7 @@
 .vscode
+Makefile
+CMakeFiles
+build
+*.swp
+*.cmake
+CMakeCache.txt
