@@ -15,7 +15,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-include_directories(.)
+include_directories(. include)
 
 add_subdirectory(Day1)
 add_subdirectory(Day2)
@@ -26,6 +26,9 @@ add_subdirectory(Day6)
 add_subdirectory(Day7)
 add_subdirectory(shared)
 
+add_library(Day8 src/Day8/Day8.cpp)
+target_include_directories(Day8 PRIVATE include)
+target_link_libraries(Day8 PRIVATE testLib)
 add_executable(main main.cpp)
 
-target_link_libraries(main PRIVATE Day7)
+target_link_libraries(main PRIVATE Day7 Day8)
