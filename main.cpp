@@ -9,6 +9,6 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    //Day8::PartOne(argv[1]);
+    Day8::PartOne(argv[1]);
     Day8::PartTwo(argv[1]);
 }

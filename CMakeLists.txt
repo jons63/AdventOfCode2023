@@ -26,9 +26,13 @@ add_subdirectory(Day6)
 add_subdirectory(Day7)
 add_subdirectory(shared)
 
-add_library(Day8 src/Day8/Day8.cpp)
-target_include_directories(Day8 PRIVATE include)
-target_link_libraries(Day8 PRIVATE testLib)
 add_executable(main main.cpp)
+target_include_directories(main PRIVATE include)
 
-target_link_libraries(main PRIVATE Day7 Day8)
+target_sources(main PRIVATE
+src/Day8/Day8.cpp
+)
+
+target_link_libraries(main PRIVATE testLib Day7)
+
+set_property(TARGET main PROPERTY CXX_STANDARD 17)

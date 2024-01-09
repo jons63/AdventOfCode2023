@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <numeric>
 
 #include "include/Day8.h"
 #include "StringHelp/StringHelp.h"
@@ -95,7 +96,7 @@ int Day8::PartTwo(const std::string& file)
 
     string line;
     string moves;
-    vector<string> nodes;
+    vector<pair<string, uint64_t>> nodes;
 
     std::getline(dataFile, moves);
     // thorw away an empty line
@@ -111,47 +112,46 @@ int Day8::PartTwo(const std::string& file)
 
         if (key[2] == 'A')
         {
-            nodes.push_back(key);
+            nodes.push_back({key, 0});
         }
         network.emplace(key, pair<string, string>{left, right});
     }
 
-    uint64_t numOfMoves{0};
-    bool continueMoving = true;
-
-    while(continueMoving)
+    for (auto& node : nodes)
     {
-        auto it = moves.begin();
-        while(it != moves.end())
+        uint64_t numOfMoves{0};
+        auto current = node.first;
+        bool continueMoving = true;
+
+        while(continueMoving)
         {
-            if (*it == 'L')
+            auto it = moves.begin();
+            while(it != moves.end())
             {
-                for (string& node : nodes)
+                if (*it == 'L')
                 {
-                    node =  network[node].first;
+                    current = network[current].first;
                 }
-            }
-            else
-            {
-                for (string& node : nodes)
+                else
                 {
-                    node =  network[node].second;
+                    current = network[current].second;
                 }
-            }
-            numOfMoves++;
-            it++;
-            if (std::all_of(nodes.begin(), nodes.end(), endsInZ))
-            {
-                continueMoving = false;
-                break;
-            }
-            if (numOfMoves % 1000000 == 0)
-            {
-                cout << numOfMoves << "\n";
+                numOfMoves++;
+                it++;
+                if (current[2] == 'Z')
+                {
+                    node.second = numOfMoves;
+                    continueMoving = false;
+                    break;
+                }
             }
         }
     }
-
-    std::cout << "8.2 answer: " << numOfMoves << "\n";
+    auto ans = nodes[0].second;
+    for (auto node : nodes)
+    {
+        ans = lcm(ans, node.second);
+    }
+    std::cout << "8.2 answer: " << ans << "\n";
     return EXIT_SUCCESS;
 }
