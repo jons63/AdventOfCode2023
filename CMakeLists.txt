@@ -31,6 +31,7 @@ target_include_directories(main PRIVATE include)
 
 target_sources(main PRIVATE
 src/Day8/Day8.cpp
+src/Day9/Day9.cpp
 )
 
 target_link_libraries(main PRIVATE testLib Day7)

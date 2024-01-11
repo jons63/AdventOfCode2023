@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "include/Day8.h"
+#include "include/Day9.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,6 +10,8 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    Day8::PartOne(argv[1]);
-    Day8::PartTwo(argv[1]);
+    //Day8::PartOne(argv[1]);
+    //Day8::PartTwo(argv[1]);
+
+    Day9::PartOne(argv[1]);
 }
