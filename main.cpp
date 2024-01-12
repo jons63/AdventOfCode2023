@@ -14,4 +14,5 @@ int main(int argc, char *argv[])
     //Day8::PartTwo(argv[1]);
 
     Day9::PartOne(argv[1]);
+    Day9::PartTwo(argv[1]);
 }

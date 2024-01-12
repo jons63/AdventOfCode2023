@@ -65,8 +65,6 @@ int Day9::PartOne(const std::string& file)
         {
             val += (*it).back();
         }
-        PrintValues(values);
-        cout << val << "\n";
         ans+=val;
     }
 
@@ -90,7 +88,35 @@ int Day9::PartTwo(const std::string& file)
 
     while (std::getline(dataFile, line))
     {
+        vector<vector<long>> values{};
+        vector<string> input =  Helpers::split(line, " ");
+        vector<long> ints{};
 
+        // vector<string> --> vector<int>
+        for (auto value : input)
+        {
+            ints.push_back(stoi(value));
+        }
+
+        values.push_back(move(ints));
+
+        while (std::any_of(values.back().begin(), values.back().end(), [](long i){return i;}))
+        {
+            vector<long> current{};
+            for (auto it = values.back().begin(); it != values.back().end()-1; it++)
+            {
+                current.push_back(*(it+1)-*it);
+            }
+            values.push_back(move(current));
+        }
+
+        long val = 0;
+        for (auto it = values.rbegin(); it < values.rend(); it++)
+        {
+            val = (*it).front() - val;
+        }
+
+        ans+=val;
     }
 
     std::cout << "8.2 answer: " << ans << "\n";
