@@ -68,7 +68,7 @@ int Day9::PartOne(const std::string& file)
         ans+=val;
     }
 
-    std::cout << "8.1 answer: " << ans << "\n";
+    std::cout << "9.1 answer: " << ans << "\n";
 
     return EXIT_SUCCESS;
 }
@@ -119,6 +119,6 @@ int Day9::PartTwo(const std::string& file)
         ans+=val;
     }
 
-    std::cout << "8.2 answer: " << ans << "\n";
+    std::cout << "9.2 answer: " << ans << "\n";
     return EXIT_SUCCESS;
 }
