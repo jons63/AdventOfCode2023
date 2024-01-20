@@ -33,6 +33,7 @@ target_sources(main PRIVATE
 src/Day8/Day8.cpp
 src/Day9/Day9.cpp
 src/Day10/Day10.cpp
+src/Day11/Day11.cpp
 )
 
 target_link_libraries(main PRIVATE testLib Day7)
