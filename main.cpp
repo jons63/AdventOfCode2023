@@ -5,6 +5,7 @@
 #include "include/Day10.h"
 #include "include/Day11.h"
 #include "include/Day12.h"
+#include "include/Day13.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,5 +27,7 @@ int main(int argc, char *argv[])
     //Day11::PartTwo(argv[1]);
 
     //Day12::PartOne(argv[1]);
-    Day12::PartTwo(argv[1]);
+    //Day12::PartTwo(argv[1]);
+
+    Day13::PartOne(argv[1]);
 }

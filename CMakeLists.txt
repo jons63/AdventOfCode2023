@@ -35,6 +35,7 @@ src/Day9/Day9.cpp
 src/Day10/Day10.cpp
 src/Day11/Day11.cpp
 src/Day12/Day12.cpp
+src/Day13/Day13.cpp
 )
 
 target_link_libraries(main PRIVATE testLib Day7)
