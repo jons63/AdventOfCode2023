@@ -30,4 +30,5 @@ int main(int argc, char *argv[])
     //Day12::PartTwo(argv[1]);
 
     Day13::PartOne(argv[1]);
+    Day13::PartTwo(argv[1]);
 }
