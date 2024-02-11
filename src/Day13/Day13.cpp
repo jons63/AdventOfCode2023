@@ -66,7 +66,6 @@ int Day13::PartOne(const std::string& file)
             pattern.emplace_back(line.begin(), line.end());
         }
     }
-    patterns.push_back(pattern);
 
     for (vector<vector<char>> pattern : patterns)
     {
@@ -176,7 +175,6 @@ int Day13::PartTwo(const std::string& file)
             pattern.emplace_back(line.begin(), line.end());
         }
     }
-    patterns.push_back(pattern);
 
     for (auto pattern : patterns)
     {
@@ -225,4 +223,63 @@ int Day13::PartTwo(const std::string& file)
     return EXIT_SUCCESS;
 }
 
-// 31135 to high
+int GetPatternScore(std::vector<uint64_t> rows_or_colls, uint8_t factor, uint8_t diff) {
+    for (auto i = 0; i < rows_or_colls.size()-1; i++) {
+        auto diffs = 0;
+        for (auto r_index = i, index = i+1; r_index >= 0 && index < rows_or_colls.size(); --r_index, ++index) {
+            diffs += __builtin_popcount(rows_or_colls[r_index] ^ rows_or_colls[index]);
+        }
+        if (diffs == diff) {
+            return (i+1)*factor;
+        }
+    }
+    return 0;
+}
+
+int Day13::CompactSolution(const std::string& file)
+{
+    std::ifstream dataFile(file);
+
+    if (!dataFile.is_open())
+    {
+        std::cerr << "Could not open input file '" << file << "'!\n";
+        return EXIT_FAILURE;
+    }
+
+    string line;
+    std::vector<uint64_t> rows;
+    std::vector<uint64_t> cols;
+
+    uint64_t ans1{0};
+    uint64_t ans2{0};
+
+    while (std::getline(dataFile, line))
+    {
+        uint64_t row{0};
+        if (cols.empty()) {
+            cols.resize(line.length());
+        }
+        if (!line.empty()) {
+            const auto col = rows.size();
+            for (auto i = 0; i < line.length(); i++) {
+                const bool bit = line[i] == '#';
+                row |= bit << i;
+                cols[i] |= bit << col;
+            }
+            rows.push_back(row);
+        } else {
+            ans1 += GetPatternScore(rows, 100, 0);
+            ans1 += GetPatternScore(cols, 1, 0);
+
+            ans2 += GetPatternScore(rows, 100, 1);
+            ans2 += GetPatternScore(cols, 1, 1);
+
+            cols.clear();
+            rows.clear();
+        }
+    }
+
+    std::cout << "13.1 answer: " << ans1 << "\n";
+    std::cout << "13.2 answer: " << ans2 << "\n";
+    return EXIT_SUCCESS;
+}
